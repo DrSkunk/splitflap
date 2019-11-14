@@ -96,10 +96,10 @@ flap_width_slop = 0.1;
 spool_width_slop = 1;
 
 
-num_flaps = 40;
+num_flaps = 11;
 
 flap_hole_radius = (flap_pin_width + 1) / 2;
-flap_gap = 1;
+flap_gap = 5;
 
 flap_spool_outset = flap_hole_radius;
 flap_pitch_radius = flap_spool_pitch_radius(num_flaps, flap_hole_radius, flap_gap); //num_flaps * (flap_hole_radius*2 + flap_gap) / (2*PI);
@@ -119,8 +119,8 @@ flap_notch_depth = 3;
 spool_width = flap_width - flap_notch_depth*2 + flap_width_slop + thickness*2;
 assert(spool_width >= flap_width, "Flap is wider than spool!");
 spool_strut_tabs = 3;
-spool_strut_tab_width=8;
-spool_strut_tab_outset=8;
+spool_strut_tab_width=6;
+spool_strut_tab_outset=6;
 spool_strut_width = (spool_strut_tab_outset + thickness/2) * 2;
 spool_strut_length_inset = 0;
 spool_strut_length = spool_width - (2 * spool_strut_length_inset);
@@ -130,7 +130,7 @@ spool_strut_exclusion_radius = sqrt((spool_strut_tab_outset+thickness/2)*(spool_
 
 
 magnet_hole_radius = (4 - 0.1)/2;
-magnet_hole_offset = (spool_strut_exclusion_radius + flap_pitch_radius)/2;
+magnet_hole_offset = ((spool_strut_exclusion_radius + flap_pitch_radius)/2) - 1;
 
 28byj48_chassis_height_slop = 1;
 
@@ -975,7 +975,7 @@ module split_flap_3d(letter, include_connector) {
     if (render_motor) {
         translate([enclosure_wall_to_wall_width - thickness - 28byj48_mount_bracket_height, 0, 0]) {
 
-            rotate([-90, 0, 0]) {
+            rotate([-55, 0, 0]) {
 
                 rotate([0, -90, 0]) {
                     Stepper28BYJ48();
