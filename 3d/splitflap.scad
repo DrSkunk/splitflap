@@ -89,6 +89,9 @@ flap_rendered_angle = 90;
 
 letter_height = flap_height * 0.75 * 2;
 
+// New parameter: The angle on which the stepper is mounted
+motor_mount_angle = -55;
+
 // Amount of slop of the flap side to side between the 2 spools
 flap_width_slop = 0.1;
 
@@ -157,7 +160,7 @@ enclosure_height_upper = exclusion_radius + enclosure_vertical_margin + thicknes
 enclosure_height_lower = flap_pitch_radius + flap_height + enclosure_vertical_margin + thickness + enclosure_vertical_inset;
 enclosure_height = enclosure_height_upper + enclosure_height_lower;
 
-enclosure_horizontal_rear_margin = thickness; // minumum distance between the farthest feature and the rear
+enclosure_horizontal_rear_margin = thickness+10; // minumum distance between the farthest feature and the rear
 
 enclosure_length = front_forward_offset + 28byj48_mount_center_offset + m4_hole_diameter/2 + enclosure_horizontal_rear_margin;
 
@@ -179,7 +182,7 @@ motor_mount_hole_radius = m4_hole_diameter/2;
 motor_backpack_extent = 28byj48_backpack_extent + 2; // Add 2mm to make sure there's room for the wires
 motor_hole_slop = 1;
 
-connector_bracket_length_outer = 14;
+connector_bracket_length_outer = 4;
 connector_bracket_length_inner = side_tab_width * 2 - m4_button_head_diameter/2;
 connector_bracket_thickness = captive_nut_inset - thickness - 0.2;
 connector_bracket_width = enclosure_width - enclosure_wall_to_wall_width + thickness*2 + connector_bracket_thickness*2;
@@ -975,7 +978,7 @@ module split_flap_3d(letter, include_connector) {
     if (render_motor) {
         translate([enclosure_wall_to_wall_width - thickness - 28byj48_mount_bracket_height, 0, 0]) {
 
-            rotate([-55, 0, 0]) {
+            rotate([motor_mount_angle, 0, 0]) {
 
                 rotate([0, -90, 0]) {
                     Stepper28BYJ48();
